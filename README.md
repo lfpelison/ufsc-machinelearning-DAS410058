@@ -1,7 +1,7 @@
 ## Webpage classification
 ### UFSC - DAS410058 - Jomi Fred Hubner
 
-A data mining and machine learning task. 
+A data mining and machine learning task. (http://jomi.das.ufsc.br/ia/2017/tp-dm.pdf)
 The task is based on html data, found in: `./webkb/` or http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-20/www/data/
 
 This data has to be classified in 7 target classes: 
