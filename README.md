@@ -22,7 +22,9 @@ And, the data is divided by universities:
 
 --
 
-To solve this problem, we made a **jupyter-notebook**, called `"web_classification.ipynb"`. Visualize it on `./web_classification.html`
+To solve this problem, we made a **jupyter-notebook**, called `"web_classification.ipynb"`, on **Python 2.7**. Visualize it on `./web_classification.html`. 
+
+*PS.1* To edit, please use Python 2.7 and download the jupyter: `pip install jupyter`
 
 *PS.* To get all the data and put on a csv (`./corpus.csv`), we made a python script (`./script.py`), that also is on the **jupyter-notebook**.
 
@@ -30,4 +32,4 @@ This project is to an academic discipline from Universidade Federal de Santa Cat
 
 ---
 
-The authors are: Luis Felipe Pelison, Angelo Baruffi and Andrei Donati
+The authors are: Luis Felipe Pelison, Alex Amadeu Cani and Iago Oliveira
