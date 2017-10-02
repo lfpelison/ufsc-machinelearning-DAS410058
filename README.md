@@ -22,7 +22,7 @@ And, the data is divided by universities:
 
 --
 
-To solve this problem, we made a **jupyter-notebook**, called `"web_classification.ipynb"`, on **Python 2.7**. Visualize it on `./web_classification.html`. 
+To solve this problem, we made a **jupyter-notebook**, called `"final_project.ipynb"`, on **Python 2.7**. Visualize it on `./final_project.html`. 
 
 *PS.1* To edit, please use Python 2.7 and download the jupyter: `pip install jupyter`
 
