@@ -12,7 +12,7 @@
 
 # ## 1. Importing data and python libraries
 
-# In[1]:
+# In[2]:
 
 
 
@@ -30,7 +30,7 @@ get_ipython().magic(u'matplotlib inline')
 
 # ### Python script to put data on a csv file
 
-# In[2]:
+# In[3]:
 
 
 urls = []
@@ -56,13 +56,13 @@ with open('corpus.csv', 'w') as output:
             target = i.split("/")[2]
             university = i.split("/")[3]
             url = i.split("/")[4]
-            print j
+            #print j
             output.write("{0}-||-{1}-||-{2}-||-{3} \n".format(url, university, html, target))
 
 
 # ### CSV to PANDAS
 
-# In[3]:
+# In[5]:
 
 
 #one = pd.read_html
@@ -71,7 +71,7 @@ one = pd.read_csv(path, sep=r"\-\|\|-", quotechar='"', engine='python')
 get_ipython().magic(u'time')
 
 
-# In[4]:
+# In[6]:
 
 
 one.head()
@@ -79,7 +79,7 @@ one.head()
 
 # ### Looking the data
 
-# In[5]:
+# In[7]:
 
 
 one.describe()
@@ -99,7 +99,7 @@ one.describe()
 # ** sum ** = 8282
 # 
 
-# In[6]:
+# In[8]:
 
 
 one.groupby(one['university']).count()
@@ -117,7 +117,7 @@ one.groupby(one['university']).count()
 # 
 # ** sum ** = 8282
 
-# In[7]:
+# In[9]:
 
 
 one.groupby(one['target']).count()
@@ -128,7 +128,7 @@ one.groupby(one['target']).count()
 # * Let's delete them.
 # 
 
-# In[8]:
+# In[10]:
 
 
 # Who is 'Nan'?
@@ -136,7 +136,7 @@ one.groupby(one['target']).count()
 one[one['html'].isnull()]
 
 
-# In[9]:
+# In[11]:
 
 
 # Deleting rows with null values. There are 17 rows.
@@ -470,40 +470,40 @@ tokens[:50]
 tokens.sample(8, random_state=10)
 
 
-# # Training with an university (MISC) and testing on WISCONSIN university.
+# # Training with an university (Wisconsin) and testing on Washington university.
 
-# In[131]:
+# In[17]:
 
 
-misc = one[one.university == 'misc']
+washington = one[one.university == 'washington']
 wisconsin = one[one.university == 'wisconsin']
 
 
-# In[132]:
+# In[18]:
 
 
-misc.shape, wisconsin.shape
+washington.shape, wisconsin.shape
 
 
-# In[133]:
+# In[20]:
 
 
 # Define X and y (from the data) for use with COUNTVECTORIZER
 
 #Training data
 
-X_misc = misc.html
-y_misc = misc.target_num
-X_misc.shape, y_misc.shape
+X_wisconsin = wisconsin.html
+y_wisconsin = wisconsin.target_num
+
 
 #Testing data
 
-X_wisconsin = wisconsin.html
-y_wisconsin = wisconsin.target_num
-X_wisconsin.shape, y_wisconsin.shape
+X_washington = washington.html
+y_washington = washington.target_num
+X_wisconsin.shape, y_wisconsin.shape, X_washington.shape, y_washington.shape
 
 
-# In[134]:
+# In[21]:
 
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -518,32 +518,40 @@ vect = CountVectorizer(encoding='latin-1', stop_words='english', ngram_range=(1,
                        
 # combine fit and transform into a single step
 
-X_misc_dtm = vect.fit_transform(X_misc)
-X_misc_dtm
+X_wisconsin_dtm = vect.fit_transform(X_wisconsin)
+X_wisconsin_dtm
 
 
-# In[135]:
+# In[23]:
 
 
 # transform testing data (using fitted vocabulary) into a document-term matrix
 
-X_wisconsin_dtm = vect.transform(X_wisconsin)
-X_wisconsin_dtm
+X_washington_dtm = vect.transform(X_washington)
+X_washington_dtm
 
 
 # ## Machine Learning
 
 # ### Random Forest
 
-# In[138]:
+# In[25]:
 
 
 from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+
 forest = RandomForestClassifier(n_estimators=300)
 
-get_ipython().magic(u'time forest.fit(X_misc_dtm, y_misc)')
+get_ipython().magic(u'time forest.fit(X_wisconsin_dtm, y_wisconsin)')
 
-y_pred_wisconsin = forest.predict(X_wisconsin_dtm)
+y_pred_washington = forest.predict(X_washington_dtm)
 
-metrics.accuracy_score(y_wisconsin, y_pred_wisconsin)
+metrics.accuracy_score(y_washington, y_pred_washington)
+
+
+# In[ ]:
+
+
+
 
